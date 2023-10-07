@@ -3,6 +3,7 @@ package functions;
 import org.junit.jupiter.api.Test;
 
 class IdentityFunctionTest {
+    @Test
     public void testApply() {
     MathFunction IdentityFunction = new IdentityFunction();
 
