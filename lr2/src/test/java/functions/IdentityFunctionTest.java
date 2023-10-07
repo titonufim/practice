@@ -1,6 +1,6 @@
 package functions;
 
-import static org.junit.jupiter.api.Assertions.*;
+import org.junit.jupiter.api.Test;
 
 class IdentityFunctionTest {
     public void testApply() {
