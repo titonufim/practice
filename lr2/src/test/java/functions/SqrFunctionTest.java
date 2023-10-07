@@ -1,5 +1,6 @@
 package functions;
 
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 public class SqrFunctionTest {
@@ -8,13 +9,13 @@ public class SqrFunctionTest {
     public void testApply() {
         MathFunction sqrFunction = new SqrFunction();
 
-        double result = sqrFunction.apply(5.0);
-        System.out.println(result + "expected: 25");
+        double result1 = sqrFunction.apply(5.0);
+        Assertions.assertEquals(25.0, result1);
 
-        result = sqrFunction.apply(-3.0);
-        System.out.println(result + "expected: 9");
+        double result2 = sqrFunction.apply(-3.0);
+        Assertions.assertEquals(9.0, result2);
 
-        result = sqrFunction.apply(0.0);
-        System.out.println(result + "expected: 0");
+        double result3 = sqrFunction.apply(0.0);
+        Assertions.assertEquals(0.0, result3);
     }
 }
