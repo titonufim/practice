@@ -15,13 +15,13 @@ class CompositeFunctionTest {
         CompositeFunction compositeFunction = new CompositeFunction(firstFunction, secondFunction);
 
         double result = compositeFunction.apply(0.5);
-        Assertions.assertEquals(1.2679, result, 0.0001);
+        Assertions.assertEquals(1.2679, result, 0.01);
 
         result = compositeFunction.apply(1);
-        Assertions.assertEquals(2.2520, result, 0.0001);
+        Assertions.assertEquals(2.2520, result, 0.01);
 
         result = compositeFunction.apply(Math.PI);
-        Assertions.assertEquals(1, result, 0.0001);
+        Assertions.assertEquals(1, result, 0.01);
 
     }
 

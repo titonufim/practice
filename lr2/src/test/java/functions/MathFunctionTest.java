@@ -17,7 +17,7 @@ class MathFunctionTest {
         assertEquals(9, result);
 
         result = addOneAndSquare.apply(-3);
-        assertEquals(16, result);
+        assertEquals(4, result);
 
         MathFunction multiplyByTwo = x -> x * 2;
         MathFunction addFive = x -> x + 5;
@@ -26,10 +26,10 @@ class MathFunctionTest {
         MathFunction combinedFunction = multiplyByTwo.andThen(addFive).andThen(subtractThree);
 
         result = combinedFunction.apply(4);
-        assertEquals(13, result);
+        assertEquals(10, result);
 
 
         result = combinedFunction.apply(-2);
-        assertEquals(1, result);
+        assertEquals(-2, result);
     }
 }
