@@ -51,7 +51,7 @@ public class ArrayTabulatedFunctionTest {
         double[] xValues = {1.0, 2.0, 3.0};
         double[] yValues = {2.0, 4.0, 6.0};
         ArrayTabulatedFunction function = new ArrayTabulatedFunction(xValues, yValues);
-        Assertions.assertEquals(0.0, function.extrapolateLeft(0.5));
+        Assertions.assertEquals(1.0, function.extrapolateLeft(0.5));
     }
 
     @Test
