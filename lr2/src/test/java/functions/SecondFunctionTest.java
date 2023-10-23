@@ -8,7 +8,7 @@ public class SecondFunctionTest {
 
     @Test
     public void testApply() {
-        MathFunction secondFunction = new secondFunction();
+        MathFunction secondFunction = new TanFunction();
 
         double result = secondFunction.apply(0);
         Assertions.assertEquals(1, result);

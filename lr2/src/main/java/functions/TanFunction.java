@@ -1,6 +1,6 @@
 package functions;
 
-public class secondFunction implements MathFunction {
+public class TanFunction implements MathFunction {
     @Override
     public double apply(double x)
     {

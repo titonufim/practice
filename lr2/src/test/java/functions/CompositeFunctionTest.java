@@ -8,9 +8,9 @@ class CompositeFunctionTest {
     @Test
     public void testApply() {
 
-        MathFunction firstFunction = new firstFunction();
+        MathFunction firstFunction = new SinFunction();
 
-        MathFunction secondFunction = new secondFunction();
+        MathFunction secondFunction = new TanFunction();
 
         CompositeFunction compositeFunction = new CompositeFunction(firstFunction, secondFunction);
 

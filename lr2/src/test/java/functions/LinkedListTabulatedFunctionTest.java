@@ -6,6 +6,44 @@ import org.junit.jupiter.api.Test;
 public class LinkedListTabulatedFunctionTest {
 
     @Test
+    public void testNodeToString() {
+        LinkedListTabulatedFunction.Node node = new LinkedListTabulatedFunction.Node(1.0, 2.0);
+        String expected = "(1.0; 2.0)";
+        String actual = node.toString();
+        Assertions.assertEquals(expected, actual);
+    }
+
+    @Test
+    public void testNodeEquals() {
+        LinkedListTabulatedFunction.Node node1 = new LinkedListTabulatedFunction.Node(1.0, 2.0);
+        LinkedListTabulatedFunction.Node node2 = new LinkedListTabulatedFunction.Node(1.0, 2.0);
+        LinkedListTabulatedFunction.Node node3 = new LinkedListTabulatedFunction.Node(2.0, 3.0);
+
+        Assertions.assertEquals(node1, node2);
+        Assertions.assertNotEquals(node1, node3);
+    }
+
+    @Test
+    public void testNodeHashCode() {
+        LinkedListTabulatedFunction.Node node1 = new LinkedListTabulatedFunction.Node(1.0, 2.0);
+        LinkedListTabulatedFunction.Node node2 = new LinkedListTabulatedFunction.Node(1.0, 2.0);
+        LinkedListTabulatedFunction.Node node3 = new LinkedListTabulatedFunction.Node(2.0, 3.0);
+
+        Assertions.assertEquals(node1.hashCode(), node2.hashCode());
+        Assertions.assertNotEquals(node1.hashCode(), node3.hashCode());
+    }
+
+    @Test
+    public void testNodeClone() {
+        LinkedListTabulatedFunction.Node node = new LinkedListTabulatedFunction.Node(1.0, 2.0);
+        LinkedListTabulatedFunction.Node cloneNode = (LinkedListTabulatedFunction.Node) node.clone();
+
+        Assertions.assertEquals(node.x, cloneNode.x);
+        Assertions.assertEquals(node.y, cloneNode.y);
+        Assertions.assertEquals(node.prev, cloneNode.prev);
+        Assertions.assertEquals(node.next, cloneNode.next);
+    }
+    @Test
     public void testLinkedListTabulatedFunctionWithArrays() {
         double[] xValues = {0, 1, 2, 3};
         double[] yValues = {0, 1, 4, 9};
@@ -128,5 +166,49 @@ public class LinkedListTabulatedFunctionTest {
         double[] yValues = {2.0, 4.0, 6.0};
         LinkedListTabulatedFunction function = new LinkedListTabulatedFunction(xValues, yValues);
         Assertions.assertEquals(5.0, function.interpolate(2.5, 1));
+    }
+
+    @Test
+    void testToString() {
+        double[] xValues = {1.0, 2.0, 3.0};
+        double[] yValues = {4.0, 5.0, 6.0};
+        LinkedListTabulatedFunction function = new LinkedListTabulatedFunction(xValues, yValues);
+        String expected = "(1.0; 4.0), (2.0; 5.0), (3.0; 6.0)";
+        Assertions.assertEquals(expected, function.toString());
+    }
+
+    @Test
+    void testEquals() {
+        double[] xValues1 = {1.0, 2.0, 3.0};
+        double[] yValues1 = {4.0, 5.0, 6.0};
+        LinkedListTabulatedFunction function1 = new LinkedListTabulatedFunction(xValues1, yValues1);
+
+        double[] xValues2 = {1.0, 2.0, 3.0};
+        double[] yValues2 = {4.0, 5.0, 6.0};
+        LinkedListTabulatedFunction function2 = new LinkedListTabulatedFunction(xValues2, yValues2);
+
+        Assertions.assertEquals(function1, function2);
+    }
+
+    @Test
+    void testHashCode() {
+        double[] xValues = {1.0, 2.0, 3.0};
+        double[] yValues = {4.0, 5.0, 6.0};
+        LinkedListTabulatedFunction function = new LinkedListTabulatedFunction(xValues, yValues);
+
+        int expectedHashCode = function.hashCode();
+        Assertions.assertEquals(expectedHashCode, function.hashCode());
+    }
+
+    @Test
+    void testClone() {
+        double[] xValues = {1.0, 2.0, 3.0};
+        double[] yValues = {4.0, 5.0, 6.0};
+        LinkedListTabulatedFunction function = new LinkedListTabulatedFunction(xValues, yValues);
+
+        LinkedListTabulatedFunction clonedFunction = (LinkedListTabulatedFunction) function.clone();
+
+        Assertions.assertEquals(function, clonedFunction);
+        Assertions.assertNotSame(function, clonedFunction);
     }
 }

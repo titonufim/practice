@@ -6,7 +6,7 @@ import org.junit.jupiter.api.Test;
 class FirstFunctionTest {
     @Test
     public void testApply() {
-        MathFunction firstFunction = new firstFunction();
+        MathFunction firstFunction = new SinFunction();
 
         double result = firstFunction.apply(0);
         Assertions.assertEquals(0, result);

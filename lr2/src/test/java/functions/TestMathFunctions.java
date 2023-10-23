@@ -42,7 +42,7 @@ public class TestMathFunctions {
         double[] yValues = {2.0, 4.0, 6.0};
         ArrayTabulatedFunction tabulatedFunction = new ArrayTabulatedFunction(xValues, yValues);
 
-        MathFunction mathFunction = new firstFunction();
+        MathFunction mathFunction = new SinFunction();
 
         int count = tabulatedFunction.getCount();
         double[] combinedXValues = new double[count];
