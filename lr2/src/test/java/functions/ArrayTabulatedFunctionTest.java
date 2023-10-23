@@ -5,6 +5,36 @@ import org.junit.jupiter.api.Test;
 
 public class ArrayTabulatedFunctionTest {
 
+
+    @Test
+    public void testArrayTabulatedFunctionWithArrays() {
+        double[] xValues = {0, 1, 2, 3};
+        double[] yValues = {0, 1, 4, 9};
+        ArrayTabulatedFunction arrayFunc = new ArrayTabulatedFunction(xValues, yValues);
+        Assertions.assertEquals(0.0, arrayFunc.getY(0), 0.001);
+        Assertions.assertEquals(1.0, arrayFunc.getY(1), 0.001);
+        Assertions.assertEquals(4.0, arrayFunc.getY(2), 0.001);
+        Assertions.assertEquals(9.0, arrayFunc.getY(3), 0.001);
+    }
+
+    @Test
+    public void testArrayTabulatedFunctionWithMathFunction() {
+        MathFunction func = new MathFunction() {
+            @Override
+            public double apply(double x) {
+                return x * x;
+            }
+        };
+        double xFrom = 0.0;
+        double xTo = 3.0;
+        int count = 4;
+        ArrayTabulatedFunction arrayFunc = new ArrayTabulatedFunction(func, xFrom, xTo, count);
+        Assertions.assertEquals(0.0, arrayFunc.getY(0), 0.001);
+        Assertions.assertEquals(1.0, arrayFunc.getY(1), 0.001);
+        Assertions.assertEquals(4.0, arrayFunc.getY(2), 0.001);
+        Assertions.assertEquals(9.0, arrayFunc.getY(3), 0.001);
+    }
+
     @Test
     public void testGetCount() {
         double[] xValues = {1.0, 2.0, 3.0};
