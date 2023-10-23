@@ -2,7 +2,7 @@ package functions;
 
 import java.util.Arrays;
 
-public class ArrayTabulatedFunction extends AbstractTabulatedFunction {
+public class ArrayTabulatedFunction extends AbstractTabulatedFunction implements Cloneable {
     private final double[] xValues;
     private final double[] yValues;
 
@@ -47,6 +47,9 @@ public class ArrayTabulatedFunction extends AbstractTabulatedFunction {
         yValues[index] = value;
     }
 
+    public void setX(int index, double value) {
+        xValues[index] = value;
+    }
     @Override
     protected int floorIndexOfX(double x) {
         if (x < xValues[0]) {
@@ -115,5 +118,36 @@ public class ArrayTabulatedFunction extends AbstractTabulatedFunction {
             }
         }
         return -1;
+    }
+    @Override
+    public String toString() {
+        return Arrays.toString(xValues) + "\n" + Arrays.toString(yValues);
+    }
+    @Override
+    public int hashCode() {
+        int result = Arrays.hashCode(xValues);
+        result = 31 * result + Arrays.hashCode(yValues);
+        return result;
+    }
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        ArrayTabulatedFunction that = (ArrayTabulatedFunction) o;
+        return Arrays.equals(xValues, that.xValues) &&
+                Arrays.equals(yValues, that.yValues);
+    }
+    @Override
+    public Object clone() throws CloneNotSupportedException {
+        ArrayTabulatedFunction clone = (ArrayTabulatedFunction) super.clone();
+        double[] clonedXValues = new double[xValues.length];
+        double[] clonedYValues = new double[yValues.length];
+        System.arraycopy(xValues, 0, clonedXValues, 0, xValues.length);
+        System.arraycopy(yValues, 0, clonedYValues, 0, yValues.length);
+        for(int i = 0; i< xValues.length; ++i) {
+            clone.setX(i, clonedXValues[i]);
+            clone.setY(i, clonedYValues[i]);
+        }
+            return clone;
     }
 }

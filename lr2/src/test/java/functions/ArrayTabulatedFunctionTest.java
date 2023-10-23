@@ -131,4 +131,52 @@ public class ArrayTabulatedFunctionTest {
         ArrayTabulatedFunction function = new ArrayTabulatedFunction(xValues, yValues);
         Assertions.assertEquals(2, function.indexOfY(6.0));
     }
+    @Test
+    public void testToString() {
+        double[] xValues = {1.0, 2.0, 3.0};
+        double[] yValues = {2.0, 4.0, 6.0};
+        ArrayTabulatedFunction function = new ArrayTabulatedFunction(xValues, yValues);
+        String expected = "[1.0, 2.0, 3.0]\n[2.0, 4.0, 6.0]";
+        String actual = function.toString();
+        Assertions.assertEquals(expected, actual);
+    }
+
+    @Test
+    public void testHashCode() {
+        double[] xValues1 = {1.0, 2.0, 3.0};
+        double[] yValues1 = {2.0, 4.0, 6.0};
+        ArrayTabulatedFunction function1 = new ArrayTabulatedFunction(xValues1, yValues1);
+
+        double[] xValues2 = {1.0, 2.0, 3.0};
+        double[] yValues2 = {2.0, 4.0, 6.0};
+        ArrayTabulatedFunction function2 = new ArrayTabulatedFunction(xValues2, yValues2);
+
+        Assertions.assertEquals(function1.hashCode(), function2.hashCode());
+    }
+
+    @Test
+    public void testEquals() {
+        double[] xValues1 = {1.0, 2.0, 3.0};
+        double[] yValues1 = {2.0, 4.0, 6.0};
+        ArrayTabulatedFunction function1 = new ArrayTabulatedFunction(xValues1, yValues1);
+
+        double[] xValues2 = {1.0, 2.0, 3.0};
+        double[] yValues2 = {2.0, 4.0, 6.0};
+        ArrayTabulatedFunction function2 = new ArrayTabulatedFunction(xValues2, yValues2);
+
+        Assertions.assertTrue(function1.equals(function2));
+    }
+
+    @Test
+    public void testClone() throws CloneNotSupportedException {
+        double[] xValues = {1.0, 2.0, 3.0};
+        double[] yValues = {2.0, 4.0, 6.0};
+        ArrayTabulatedFunction function = new ArrayTabulatedFunction(xValues, yValues);
+        ArrayTabulatedFunction clone = (ArrayTabulatedFunction) function.clone();
+        Assertions.assertNotSame(function, clone);
+        for (int i = 0; i < xValues.length; ++i) {
+            Assertions.assertEquals(xValues[i], clone.getX(i), 0.0);
+            Assertions.assertEquals(yValues[i], clone.getY(i), 0.0);
+        }
+    }
 }
