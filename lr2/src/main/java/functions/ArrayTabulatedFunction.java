@@ -7,11 +7,16 @@ public class ArrayTabulatedFunction extends AbstractTabulatedFunction implements
     private final double[] yValues;
 
     public ArrayTabulatedFunction(double[] xValues, double[] yValues) {
+        if (xValues.length < 2 || yValues.length < 2)
+            throw new IllegalArgumentException("Length of arrays is less than 2");
         this.xValues = Arrays.copyOf(xValues, xValues.length);
         this.yValues = Arrays.copyOf(yValues, yValues.length);
     }
 
     public ArrayTabulatedFunction(MathFunction source, double xFrom, double xTo, int count) {
+
+        if (count < 2)
+            throw new IllegalArgumentException("Length of arrays is less than 2");
         if (xFrom > xTo) {
             double temp = xFrom;
             xFrom = xTo;
@@ -34,11 +39,18 @@ public class ArrayTabulatedFunction extends AbstractTabulatedFunction implements
 
     @Override
     public double getX(int index) {
+        if (index < 0 || index >= xValues.length) {
+            throw new IllegalArgumentException("Invalid index");
+        }
         return xValues[index];
     }
 
     @Override
     public double getY(int index) {
+        if (index < 0 || index >= yValues.length) {
+            throw new IllegalArgumentException("Invalid index");
+
+        }
         return yValues[index];
     }
 
@@ -52,9 +64,8 @@ public class ArrayTabulatedFunction extends AbstractTabulatedFunction implements
     }
     @Override
     protected int floorIndexOfX(double x) {
-        if (x < xValues[0]) {
-            return -1;
-        }
+        if (x < xValues[0])
+            throw new IllegalArgumentException("x is less than the minimum value in xValues");
         for (int i = 0; i < xValues.length - 1; i++) {
             if (x >= xValues[i] && x <= xValues[i + 1]) {
                 return i;

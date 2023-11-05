@@ -1,8 +1,10 @@
 package functions;
 
 import java.util.Objects;
+
+
 public class LinkedListTabulatedFunction extends AbstractTabulatedFunction {
-      static class Node {
+    static class Node {
         public double x;
         public double y;
         public Node next;
@@ -15,11 +17,12 @@ public class LinkedListTabulatedFunction extends AbstractTabulatedFunction {
             this.prev = null;
         }
 
-
+        @Override
         public String toString() {
             return "(" + x + "; " + y + ")";
         }
 
+        @Override
         public boolean equals(Object o) {
             if (this == o) return true;
             if (o == null || getClass() != o.getClass()) return false;
@@ -27,12 +30,12 @@ public class LinkedListTabulatedFunction extends AbstractTabulatedFunction {
             return Double.compare(x, node.x) == 0 && Double.compare(y, node.y) == 0 && Objects.equals(next, node.next) && Objects.equals(prev, node.prev);
         }
 
+        @Override
         public int hashCode() {
-            int result = 31 * Double.hashCode(x);
-            result = 31 * result + Double.hashCode(y);
-            return result;
+            return Objects.hash(x, y);
         }
 
+        @Override
         public Object clone() {
             Node cloneNode = new Node(x, y);
             cloneNode.prev = this.prev;
@@ -61,12 +64,17 @@ public class LinkedListTabulatedFunction extends AbstractTabulatedFunction {
     }
 
     public LinkedListTabulatedFunction(double[] xValues, double[] yValues) {
+        if (xValues.length < 2 || yValues.length < 2)
+            throw new IllegalArgumentException("Length of arrays is less than 2");
         for (int i = 0; i < xValues.length; i++) {
             addNode(xValues[i], yValues[i]);
         }
     }
 
     public LinkedListTabulatedFunction(MathFunction source, double xFrom, double xTo, int count) {
+        if (count < 0) {
+            throw new IllegalArgumentException("Length of list is less than 2");
+        }
         if (xFrom > xTo) {
             double temp = xFrom;
             xFrom = xTo;
@@ -100,6 +108,9 @@ public class LinkedListTabulatedFunction extends AbstractTabulatedFunction {
     }
 
     private Node getNode(int index) {
+        if (index < 0 || index >= count) {
+            throw new IndexOutOfBoundsException("Index: " + index + ", Size: " + count);
+        }
         Node currentNode;
         if (index < count / 2) {
             currentNode = head;
@@ -117,10 +128,16 @@ public class LinkedListTabulatedFunction extends AbstractTabulatedFunction {
 
 
     public double getX(int index) {
+        if (index < 0 || index >= count) {
+            throw new IllegalArgumentException("Invalid index");
+        }
         return getNode(index).x;
     }
 
     public double getY(int index) {
+        if (index < 0 || index >= count) {
+            throw new IllegalArgumentException("Invalid index");
+        }
         return getNode(index).y;
     }
 
@@ -129,6 +146,7 @@ public class LinkedListTabulatedFunction extends AbstractTabulatedFunction {
     }
 
     public int indexOfX(double x) {
+
         Node currentNode = head;
         for (int i = 0; i < count; i++) {
             if (currentNode.x == x) {
@@ -151,17 +169,12 @@ public class LinkedListTabulatedFunction extends AbstractTabulatedFunction {
     }
 
     protected int floorIndexOfX(double x) {
-        if (x < head.x) {
-            return -1;
+        if (x < leftBound()) {
+            throw new IllegalArgumentException("x < left bound");
         }
-        Node currentNode = head;
-        for (int i = 0; i < count; i++) {
-            if (x >= currentNode.x && x <= currentNode.next.x) {
-                return i;
-            }
-            currentNode = currentNode.next;
-        }
-        return count - 1;
+        int  index = 0;
+        while (index < count && getNode(index).x < x) ++index;
+        return (index == count || index == 0) ? index : --index;
     }
 
     protected double extrapolateLeft(double x) {
@@ -180,7 +193,7 @@ public class LinkedListTabulatedFunction extends AbstractTabulatedFunction {
         return interpolate(x, x0, x1, y0, y1);
     }
 
-    protected double interpolate(double x, int floorIndex) {
+    protected double interpolate(double x, int floorIndex)  {
         Node node = getNode(floorIndex);
         double x0 = node.x;
         double x1 = node.next.x;
@@ -189,6 +202,7 @@ public class LinkedListTabulatedFunction extends AbstractTabulatedFunction {
         return interpolate(x, x0, x1, y0, y1);
     }
 
+    @Override
     public String toString() {
         String result = "";
         Node currentNode = head;
@@ -202,6 +216,7 @@ public class LinkedListTabulatedFunction extends AbstractTabulatedFunction {
         return result;
     }
 
+    @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
@@ -215,6 +230,8 @@ public class LinkedListTabulatedFunction extends AbstractTabulatedFunction {
         }
         return true;
     }
+
+    @Override
     public Object clone() {
         double[] clonedXValues = new double[count];
         double[] clonedYValues = new double[count];
@@ -224,13 +241,16 @@ public class LinkedListTabulatedFunction extends AbstractTabulatedFunction {
         }
         return new LinkedListTabulatedFunction(clonedXValues, clonedYValues);
     }
+
+    @Override
     public int hashCode() {
-        int result = 1;
-        Node currentNode = head;
-        for (int i = 0; i < count; i++) {
-            result = 31 * result + currentNode.hashCode();
-            currentNode = currentNode.next;
-        }
+        Node temp = head;
+        int result = 17;
+        do {
+            result = 31 * result + temp.hashCode();
+            temp = temp.next;
+        } while (temp != head);
+
         return result;
     }
 

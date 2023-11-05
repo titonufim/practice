@@ -169,6 +169,22 @@ public class LinkedListTabulatedFunctionTest {
     }
 
     @Test
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     void testToString() {
         double[] xValues = {1.0, 2.0, 3.0};
         double[] yValues = {4.0, 5.0, 6.0};
