@@ -1,6 +1,11 @@
 package functions;
 
+import exceptions.ArrayIsNotSortedException;
+import exceptions.DifferentLengthOfArraysException;
+import exceptions.InterpolationException;
+
 import java.util.Arrays;
+import java.util.Iterator;
 
 public class ArrayTabulatedFunction extends AbstractTabulatedFunction implements Cloneable {
     private final double[] xValues;
@@ -94,6 +99,9 @@ public class ArrayTabulatedFunction extends AbstractTabulatedFunction implements
 
     @Override
     protected double interpolate(double x, int floorIndex) {
+
+        if(x>this.getX(floorIndex+1)||x<this.getX(floorIndex))
+         throw new InterpolationException("index in uninterpolated period");
         double x0 = xValues[floorIndex];
         double x1 = xValues[floorIndex + 1];
         double y0 = yValues[floorIndex];
@@ -160,5 +168,10 @@ public class ArrayTabulatedFunction extends AbstractTabulatedFunction implements
             clone.setY(i, clonedYValues[i]);
         }
             return clone;
+    }
+
+    @Override
+    public Iterator<Point> iterator() {
+        throw new UnsupportedOperationException();
     }
 }

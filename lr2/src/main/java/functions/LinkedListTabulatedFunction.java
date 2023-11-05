@@ -1,6 +1,11 @@
 package functions;
 
+import exceptions.ArrayIsNotSortedException;
+import exceptions.DifferentLengthOfArraysException;
+import exceptions.InterpolationException;
+
 import java.util.Objects;
+import java.util.Iterator;
 
 
 public class LinkedListTabulatedFunction extends AbstractTabulatedFunction {
@@ -194,6 +199,8 @@ public class LinkedListTabulatedFunction extends AbstractTabulatedFunction {
     }
 
     protected double interpolate(double x, int floorIndex)  {
+        if(x>getX(floorIndex+1)||x<getX(floorIndex))
+         throw new InterpolationException("index in uninterpolated period");
         Node node = getNode(floorIndex);
         double x0 = node.x;
         double x1 = node.next.x;
@@ -254,4 +261,7 @@ public class LinkedListTabulatedFunction extends AbstractTabulatedFunction {
         return result;
     }
 
+    public Iterator<Point> iterator() {
+        throw new UnsupportedOperationException();
+    }
 }

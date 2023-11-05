@@ -45,14 +45,16 @@ public class LinkedListTabulatedFunctionTest {
     }
     @Test
     public void testLinkedListTabulatedFunctionWithArrays() {
-        double[] xValues = {0, 1, 2, 3};
-        double[] yValues = {0, 1, 4, 9};
-        LinkedListTabulatedFunction linkedListFunc = new LinkedListTabulatedFunction(xValues, yValues);
-        Assertions.assertEquals(0.0, linkedListFunc.getY(0), 0.001);
-        Assertions.assertEquals(1.0, linkedListFunc.getY(1), 0.001);
-        Assertions.assertEquals(4.0, linkedListFunc.getY(2), 0.001);
-        Assertions.assertEquals(9.0, linkedListFunc.getY(3), 0.001);
+        double[] xValues = {0.0, 1.0, 2.0, 3.0};
+        double[] yValues = {0.0, 1.0, 4.0, 9.0};
+        LinkedListTabulatedFunction function = new LinkedListTabulatedFunction(xValues, yValues);
+
+        Assertions.assertEquals(4, function.getCount());
+        Assertions.assertEquals(0.0, function.getX(0), 0.0001);
+        Assertions.assertEquals(1.0, function.getY(1), 0.0001);
+        Assertions.assertEquals(9.0, function.getY(3), 0.0001);
     }
+
 
     @Test
     public void testLinkedListTabulatedFunctionWithMathFunction() {
