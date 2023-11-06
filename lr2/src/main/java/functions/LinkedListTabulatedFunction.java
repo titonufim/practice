@@ -38,7 +38,9 @@ public class LinkedListTabulatedFunction extends AbstractTabulatedFunction {
 
         @Override
         public int hashCode() {
-            return Objects.hash(x, y);
+            int result = 31 * Double.hashCode(x);
+            result = 31 * result + Double.hashCode(y);
+            return result;
         }
 
         @Override
