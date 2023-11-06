@@ -6,6 +6,7 @@ import exceptions.InterpolationException;
 
 import java.util.Objects;
 import java.util.Iterator;
+import java.util.NoSuchElementException;
 
 
 public class LinkedListTabulatedFunction extends AbstractTabulatedFunction {
@@ -177,7 +178,7 @@ public class LinkedListTabulatedFunction extends AbstractTabulatedFunction {
         if (x < leftBound()) {
             throw new IllegalArgumentException("x < left bound");
         }
-        int  index = 0;
+        int index = 0;
         while (index < count && getNode(index).x < x) ++index;
         return (index == count || index == 0) ? index : --index;
     }
@@ -198,9 +199,9 @@ public class LinkedListTabulatedFunction extends AbstractTabulatedFunction {
         return interpolate(x, x0, x1, y0, y1);
     }
 
-    protected double interpolate(double x, int floorIndex)  {
-        if(x>getX(floorIndex+1)||x<getX(floorIndex))
-         throw new InterpolationException("index in uninterpolated period");
+    protected double interpolate(double x, int floorIndex) {
+        if (x > getX(floorIndex + 1) || x < getX(floorIndex))
+            throw new InterpolationException("index in uninterpolated period");
         Node node = getNode(floorIndex);
         double x0 = node.x;
         double x1 = node.next.x;
@@ -261,7 +262,24 @@ public class LinkedListTabulatedFunction extends AbstractTabulatedFunction {
         return result;
     }
 
-    public Iterator<Point> iterator() {
-        throw new UnsupportedOperationException();
+    public Iterator<Point> iterator() throws UnsupportedOperationException {
+        return new Iterator<Point>() {
+            private Node node = head;
+
+            @Override
+            public boolean hasNext() {
+                return (node != null);
+            }
+
+            @Override
+            public Point next() {
+                if (!hasNext()) {
+                    throw new NoSuchElementException();
+                }
+                Point point = new Point(node.x, node.y);
+                node = node.next;
+                return point;
+            }
+        };
     }
 }
