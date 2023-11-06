@@ -250,7 +250,6 @@ public class LinkedListTabulatedFunctionTest {
         double xFrom = 0.0;
         double xTo = 1.0;
         int count = 1;
-
         assertThrows(IllegalArgumentException.class, () -> new LinkedListTabulatedFunction(source, xFrom, xTo, count));
     }
 

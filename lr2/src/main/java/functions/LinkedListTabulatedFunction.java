@@ -80,7 +80,7 @@ public class LinkedListTabulatedFunction extends AbstractTabulatedFunction {
     }
 
     public LinkedListTabulatedFunction(MathFunction source, double xFrom, double xTo, int count) {
-        if (count < 0) {
+        if (count < 2) {
             throw new IllegalArgumentException("Length of list is less than 2");
         }
         if (xFrom > xTo) {
@@ -264,22 +264,25 @@ public class LinkedListTabulatedFunction extends AbstractTabulatedFunction {
         return result;
     }
 
-    public Iterator<Point> iterator() throws UnsupportedOperationException {
+    @Override
+    public Iterator<Point> iterator() {
         return new Iterator<Point>() {
-            private Node node = head;
+            private Node curNode = head;
+            private int tempCount = 0;
 
             @Override
             public boolean hasNext() {
-                return (node != null);
+                return tempCount < getCount();
             }
 
             @Override
             public Point next() {
                 if (!hasNext()) {
-                    throw new NoSuchElementException();
+                    throw new NoSuchElementException("Elements not found...");
                 }
-                Point point = new Point(node.x, node.y);
-                node = node.next;
+                Point point = new Point(curNode.x, curNode.y);
+                curNode = curNode.next;
+                this.tempCount++;
                 return point;
             }
         };

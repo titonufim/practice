@@ -67,18 +67,18 @@ public class TabulatedFunctionOperationServiceTest {
     }
     @Test
     public void testAddDifferentTypes() {
-        TabulatedFunction function1 = new LinkedListTabulatedFunction(new double[]{1.0, 2.0, 3.0}, new double[]{2.0, 4.0, 6.0});
-        TabulatedFunction function2 = new ArrayTabulatedFunction(new double[]{1.0, 2.0, 3.0}, new double[]{3.0, 2.0, 1.0});
-        TabulatedFunction expected = new LinkedListTabulatedFunction(new double[]{1.0, 2.0, 3.0}, new double[]{5.0, 6.0, 7.0});
+        TabulatedFunction function1 = new ArrayTabulatedFunction(new double[]{1.0, 2.0, 3.0}, new double[]{2.0, 4.0, 6.0});
+        TabulatedFunction function2 = new LinkedListTabulatedFunction(new double[]{1.0, 2.0, 3.0}, new double[]{3.0, 2.0, 1.0});
+        TabulatedFunction expected = new ArrayTabulatedFunction(new double[]{1.0, 2.0, 3.0}, new double[]{5.0, 6.0, 7.0});
         TabulatedFunction actual = operationService.add(function1, function2);
         assertEquals(expected, actual);
     }
 
     @Test
     public void testSubtractDifferentTypes() {
-        TabulatedFunction function1 = new LinkedListTabulatedFunction(new double[]{1.0, 2.0, 3.0}, new double[]{2.0, 4.0, 6.0});
-        TabulatedFunction function2 = new ArrayTabulatedFunction(new double[]{1.0, 2.0, 3.0}, new double[]{3.0, 2.0, 1.0});
-        TabulatedFunction expected = new LinkedListTabulatedFunction(new double[]{1.0, 2.0, 3.0}, new double[]{-1.0, 2.0, 5.0});
+        TabulatedFunction function1 = new ArrayTabulatedFunction(new double[]{1.0, 2.0, 3.0}, new double[]{2.0, 4.0, 6.0});
+        TabulatedFunction function2 = new LinkedListTabulatedFunction(new double[]{1.0, 2.0, 3.0}, new double[]{3.0, 2.0, 1.0});
+        TabulatedFunction expected = new ArrayTabulatedFunction(new double[]{1.0, 2.0, 3.0}, new double[]{-1.0, 2.0, 5.0});
         TabulatedFunction actual = operationService.subtract(function1, function2);
         assertEquals(expected, actual);
     }
