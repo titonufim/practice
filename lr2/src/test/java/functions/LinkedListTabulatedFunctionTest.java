@@ -1,7 +1,13 @@
 package functions;
 
+import exceptions.InterpolationException;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
+
+import java.util.Iterator;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public class LinkedListTabulatedFunctionTest {
 
@@ -10,7 +16,7 @@ public class LinkedListTabulatedFunctionTest {
         LinkedListTabulatedFunction.Node node = new LinkedListTabulatedFunction.Node(1.0, 2.0);
         String expected = "(1.0; 2.0)";
         String actual = node.toString();
-        Assertions.assertEquals(expected, actual);
+        assertEquals(expected, actual);
     }
 
     @Test
@@ -19,7 +25,7 @@ public class LinkedListTabulatedFunctionTest {
         LinkedListTabulatedFunction.Node node2 = new LinkedListTabulatedFunction.Node(1.0, 2.0);
         LinkedListTabulatedFunction.Node node3 = new LinkedListTabulatedFunction.Node(2.0, 3.0);
 
-        Assertions.assertEquals(node1, node2);
+        assertEquals(node1, node2);
         Assertions.assertNotEquals(node1, node3);
     }
 
@@ -29,7 +35,7 @@ public class LinkedListTabulatedFunctionTest {
         LinkedListTabulatedFunction.Node node2 = new LinkedListTabulatedFunction.Node(1.0, 2.0);
         LinkedListTabulatedFunction.Node node3 = new LinkedListTabulatedFunction.Node(2.0, 3.0);
 
-        Assertions.assertEquals(node1.hashCode(), node2.hashCode());
+        assertEquals(node1.hashCode(), node2.hashCode());
         Assertions.assertNotEquals(node1.hashCode(), node3.hashCode());
     }
 
@@ -38,10 +44,10 @@ public class LinkedListTabulatedFunctionTest {
         LinkedListTabulatedFunction.Node node = new LinkedListTabulatedFunction.Node(1.0, 2.0);
         LinkedListTabulatedFunction.Node cloneNode = (LinkedListTabulatedFunction.Node) node.clone();
 
-        Assertions.assertEquals(node.x, cloneNode.x);
-        Assertions.assertEquals(node.y, cloneNode.y);
-        Assertions.assertEquals(node.prev, cloneNode.prev);
-        Assertions.assertEquals(node.next, cloneNode.next);
+        assertEquals(node.x, cloneNode.x);
+        assertEquals(node.y, cloneNode.y);
+        assertEquals(node.prev, cloneNode.prev);
+        assertEquals(node.next, cloneNode.next);
     }
     @Test
     public void testLinkedListTabulatedFunctionWithArrays() {
@@ -49,10 +55,10 @@ public class LinkedListTabulatedFunctionTest {
         double[] yValues = {0.0, 1.0, 4.0, 9.0};
         LinkedListTabulatedFunction function = new LinkedListTabulatedFunction(xValues, yValues);
 
-        Assertions.assertEquals(4, function.getCount());
-        Assertions.assertEquals(0.0, function.getX(0), 0.0001);
-        Assertions.assertEquals(1.0, function.getY(1), 0.0001);
-        Assertions.assertEquals(9.0, function.getY(3), 0.0001);
+        assertEquals(4, function.getCount());
+        assertEquals(0.0, function.getX(0), 0.0001);
+        assertEquals(1.0, function.getY(1), 0.0001);
+        assertEquals(9.0, function.getY(3), 0.0001);
     }
 
 
@@ -68,17 +74,17 @@ public class LinkedListTabulatedFunctionTest {
         double xTo = 3.0;
         int count = 4;
         LinkedListTabulatedFunction linkedListFunc = new LinkedListTabulatedFunction(func, xFrom, xTo, count);
-        Assertions.assertEquals(0.0, linkedListFunc.getY(0), 0.001);
-        Assertions.assertEquals(1.0, linkedListFunc.getY(1), 0.001);
-        Assertions.assertEquals(4.0, linkedListFunc.getY(2), 0.001);
-        Assertions.assertEquals(9.0, linkedListFunc.getY(3), 0.001);
+        assertEquals(0.0, linkedListFunc.getY(0), 0.001);
+        assertEquals(1.0, linkedListFunc.getY(1), 0.001);
+        assertEquals(4.0, linkedListFunc.getY(2), 0.001);
+        assertEquals(9.0, linkedListFunc.getY(3), 0.001);
     }
     @Test
     public void testGetCount() {
         double[] xValues = {1.0, 2.0, 3.0};
         double[] yValues = {2.0, 4.0, 6.0};
         LinkedListTabulatedFunction function = new LinkedListTabulatedFunction(xValues, yValues);
-        Assertions.assertEquals(3, function.getCount());
+        assertEquals(3, function.getCount());
     }
 
     @Test
@@ -86,7 +92,7 @@ public class LinkedListTabulatedFunctionTest {
         double[] xValues = {1.0, 2.0, 3.0};
         double[] yValues = {2.0, 4.0, 6.0};
         LinkedListTabulatedFunction function = new LinkedListTabulatedFunction(xValues, yValues);
-        Assertions.assertEquals(1.0, function.leftBound());
+        assertEquals(1.0, function.leftBound());
     }
 
     @Test
@@ -94,7 +100,7 @@ public class LinkedListTabulatedFunctionTest {
         double[] xValues = {1.0, 2.0, 3.0};
         double[] yValues = {2.0, 4.0, 6.0};
         LinkedListTabulatedFunction function = new LinkedListTabulatedFunction(xValues, yValues);
-        Assertions.assertEquals(3.0, function.rightBound());
+        assertEquals(3.0, function.rightBound());
     }
 
     @Test
@@ -102,7 +108,7 @@ public class LinkedListTabulatedFunctionTest {
         double[] xValues = {1.0, 2.0, 3.0};
         double[] yValues = {2.0, 4.0, 6.0};
         LinkedListTabulatedFunction function = new LinkedListTabulatedFunction(xValues, yValues);
-        Assertions.assertEquals(2.0, function.getX(1));
+        assertEquals(2.0, function.getX(1));
     }
 
     @Test
@@ -110,7 +116,7 @@ public class LinkedListTabulatedFunctionTest {
         double[] xValues = {1.0, 2.0, 3.0};
         double[] yValues = {2.0, 4.0, 6.0};
         LinkedListTabulatedFunction function = new LinkedListTabulatedFunction(xValues, yValues);
-        Assertions.assertEquals(4.0, function.getY(1));
+        assertEquals(4.0, function.getY(1));
     }
 
     @Test
@@ -119,7 +125,7 @@ public class LinkedListTabulatedFunctionTest {
         double[] yValues = {2.0, 4.0, 6.0};
         LinkedListTabulatedFunction function = new LinkedListTabulatedFunction(xValues, yValues);
         function.setY(1, 5.0);
-        Assertions.assertEquals(5.0, function.getY(1));
+        assertEquals(5.0, function.getY(1));
     }
 
     @Test
@@ -127,7 +133,7 @@ public class LinkedListTabulatedFunctionTest {
         double[] xValues = {1.0, 2.0, 3.0};
         double[] yValues = {2.0, 4.0, 6.0};
         LinkedListTabulatedFunction function = new LinkedListTabulatedFunction(xValues, yValues);
-        Assertions.assertEquals(1, function.indexOfX(2.0));
+        assertEquals(1, function.indexOfX(2.0));
     }
 
     @Test
@@ -135,7 +141,7 @@ public class LinkedListTabulatedFunctionTest {
         double[] xValues = {1.0, 2.0, 3.0};
         double[] yValues = {2.0, 4.0, 6.0};
         LinkedListTabulatedFunction function = new LinkedListTabulatedFunction(xValues, yValues);
-        Assertions.assertEquals(2, function.indexOfY(6.0));
+        assertEquals(2, function.indexOfY(6.0));
     }
 
     @Test
@@ -143,7 +149,7 @@ public class LinkedListTabulatedFunctionTest {
         double[] xValues = {1.0, 2.0, 3.0};
         double[] yValues = {2.0, 4.0, 6.0};
         LinkedListTabulatedFunction function = new LinkedListTabulatedFunction(xValues, yValues);
-        Assertions.assertEquals(1, function.floorIndexOfX(2.5));
+        assertEquals(1, function.floorIndexOfX(2.5));
     }
 
     @Test
@@ -151,7 +157,7 @@ public class LinkedListTabulatedFunctionTest {
         double[] xValues = {1.0, 2.0, 3.0};
         double[] yValues = {2.0, 4.0, 6.0};
         LinkedListTabulatedFunction function = new LinkedListTabulatedFunction(xValues, yValues);
-        Assertions.assertEquals(1.0, function.extrapolateLeft(0.5));
+        assertEquals(1.0, function.extrapolateLeft(0.5));
     }
 
     @Test
@@ -159,7 +165,7 @@ public class LinkedListTabulatedFunctionTest {
         double[] xValues = {1.0, 2.0, 3.0};
         double[] yValues = {2.0, 4.0, 6.0};
         LinkedListTabulatedFunction function = new LinkedListTabulatedFunction(xValues, yValues);
-        Assertions.assertEquals(8.0, function.extrapolateRight(4.0));
+        assertEquals(8.0, function.extrapolateRight(4.0));
     }
 
     @Test
@@ -167,7 +173,7 @@ public class LinkedListTabulatedFunctionTest {
         double[] xValues = {1.0, 2.0, 3.0};
         double[] yValues = {2.0, 4.0, 6.0};
         LinkedListTabulatedFunction function = new LinkedListTabulatedFunction(xValues, yValues);
-        Assertions.assertEquals(5.0, function.interpolate(2.5, 1));
+        assertEquals(5.0, function.interpolate(2.5, 1));
     }
 
     @Test
@@ -192,7 +198,7 @@ public class LinkedListTabulatedFunctionTest {
         double[] yValues = {4.0, 5.0, 6.0};
         LinkedListTabulatedFunction function = new LinkedListTabulatedFunction(xValues, yValues);
         String expected = "(1.0; 4.0), (2.0; 5.0), (3.0; 6.0)";
-        Assertions.assertEquals(expected, function.toString());
+        assertEquals(expected, function.toString());
     }
 
     @Test
@@ -205,7 +211,7 @@ public class LinkedListTabulatedFunctionTest {
         double[] yValues2 = {4.0, 5.0, 6.0};
         LinkedListTabulatedFunction function2 = new LinkedListTabulatedFunction(xValues2, yValues2);
 
-        Assertions.assertEquals(function1, function2);
+        assertEquals(function1, function2);
     }
 
     @Test
@@ -215,7 +221,7 @@ public class LinkedListTabulatedFunctionTest {
         LinkedListTabulatedFunction function = new LinkedListTabulatedFunction(xValues, yValues);
 
         int expectedHashCode = function.hashCode();
-        Assertions.assertEquals(expectedHashCode, function.hashCode());
+        assertEquals(expectedHashCode, function.hashCode());
     }
 
     @Test
@@ -226,7 +232,75 @@ public class LinkedListTabulatedFunctionTest {
 
         LinkedListTabulatedFunction clonedFunction = (LinkedListTabulatedFunction) function.clone();
 
-        Assertions.assertEquals(function, clonedFunction);
+        assertEquals(function, clonedFunction);
         Assertions.assertNotSame(function, clonedFunction);
+    }
+
+    @Test
+    public void testConstructor_ArrayLengthLessThan2() {
+        double[] xValues = {1.0};
+        double[] yValues = {2.0};
+
+        assertThrows(IllegalArgumentException.class, () -> new LinkedListTabulatedFunction(xValues, yValues));
+    }
+
+    @Test
+    public void testConstructor_MathFunctionCountLessThan2() {
+        MathFunction source = x -> x;
+        double xFrom = 0.0;
+        double xTo = 1.0;
+        int count = 1;
+
+        assertThrows(IllegalArgumentException.class, () -> new LinkedListTabulatedFunction(source, xFrom, xTo, count));
+    }
+
+    @Test
+    public void testFloorIndexOfX_XLessThanLeftBound() {
+        double[] xValues = {1.0, 2.0, 3.0};
+        double[] yValues = {2.0, 4.0, 6.0};
+        LinkedListTabulatedFunction function = new LinkedListTabulatedFunction(xValues, yValues);
+
+        assertThrows(IllegalArgumentException.class, () -> function.floorIndexOfX(0.5));
+    }
+
+    @Test
+    public void testInterpolate_UninterpolatedPeriod() {
+        double[] xValues = {1.0, 2.0, 3.0};
+        double[] yValues = {2.0, 4.0, 6.0};
+        LinkedListTabulatedFunction function = new LinkedListTabulatedFunction(xValues, yValues);
+
+        assertThrows(InterpolationException.class, () -> function.interpolate(0.5, 0));
+    }
+
+    @Test
+    public void testIterator_WhileLoop() {
+        double[] xValues = {1.0, 2.0, 3.0};
+        double[] yValues = {2.0, 4.0, 6.0};
+        LinkedListTabulatedFunction function = new LinkedListTabulatedFunction(xValues, yValues);
+
+        Iterator<Point> iterator = function.iterator();
+        int count = 0;
+        while (iterator.hasNext()) {
+            Point point = iterator.next();
+            assertEquals(xValues[count], point.x, 0.0001);
+            assertEquals(yValues[count], point.y, 0.0001);
+            count++;
+        }
+        assertEquals(xValues.length, count);
+    }
+
+    @Test
+    public void testIterator_ForEachLoop() {
+        double[] xValues = {1.0, 2.0, 3.0};
+        double[] yValues = {2.0, 4.0, 6.0};
+        LinkedListTabulatedFunction function = new LinkedListTabulatedFunction(xValues, yValues);
+
+        int count = 0;
+        for (Point point : function) {
+            assertEquals(xValues[count], point.x, 0.0001);
+            assertEquals(yValues[count], point.y, 0.0001);
+            count++;
+        }
+        assertEquals(xValues.length, count);
     }
 }

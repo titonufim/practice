@@ -19,6 +19,13 @@ public class TabulatedFunctionOperationService {
         return asPointsArray;
     }
 
+    public TabulatedFunctionFactory getFactory() {
+        return factory;
+    }
+
+    public void setFactory(TabulatedFunctionFactory factory) {
+        this.factory = factory;
+    }
     TabulatedFunction doOperation(TabulatedFunction a, TabulatedFunction b, BiOperation operation) {
 
         if (a.getCount() != b.getCount())
@@ -49,6 +56,16 @@ public class TabulatedFunctionOperationService {
 
     public TabulatedFunction division(TabulatedFunction firstFunction, TabulatedFunction secondFunction) {
         BiOperation operation = (u, v) -> u / v;
+        return doOperation(firstFunction, secondFunction, operation);
+    }
+
+    public TabulatedFunction add(TabulatedFunction firstFunction, TabulatedFunction secondFunction) {
+        BiOperation operation = (u, v) -> u + v;
+        return doOperation(firstFunction, secondFunction, operation);
+    }
+
+    public TabulatedFunction subtract(TabulatedFunction firstFunction, TabulatedFunction secondFunction) {
+        BiOperation operation = (u, v) -> u - v;
         return doOperation(firstFunction, secondFunction, operation);
     }
 }

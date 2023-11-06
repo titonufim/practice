@@ -1,7 +1,14 @@
 package functions;
 
+
+import exceptions.InterpolationException;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
+
+import java.util.Iterator;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public class ArrayTabulatedFunctionTest {
 
@@ -11,10 +18,10 @@ public class ArrayTabulatedFunctionTest {
         double[] xValues = {0, 1, 2, 3};
         double[] yValues = {0, 1, 4, 9};
         ArrayTabulatedFunction arrayFunc = new ArrayTabulatedFunction(xValues, yValues);
-        Assertions.assertEquals(0.0, arrayFunc.getY(0), 0.001);
-        Assertions.assertEquals(1.0, arrayFunc.getY(1), 0.001);
-        Assertions.assertEquals(4.0, arrayFunc.getY(2), 0.001);
-        Assertions.assertEquals(9.0, arrayFunc.getY(3), 0.001);
+        assertEquals(0.0, arrayFunc.getY(0), 0.001);
+        assertEquals(1.0, arrayFunc.getY(1), 0.001);
+        assertEquals(4.0, arrayFunc.getY(2), 0.001);
+        assertEquals(9.0, arrayFunc.getY(3), 0.001);
     }
 
     @Test
@@ -29,10 +36,10 @@ public class ArrayTabulatedFunctionTest {
         double xTo = 3.0;
         int count = 4;
         ArrayTabulatedFunction arrayFunc = new ArrayTabulatedFunction(func, xFrom, xTo, count);
-        Assertions.assertEquals(0.0, arrayFunc.getY(0), 0.001);
-        Assertions.assertEquals(1.0, arrayFunc.getY(1), 0.001);
-        Assertions.assertEquals(4.0, arrayFunc.getY(2), 0.001);
-        Assertions.assertEquals(9.0, arrayFunc.getY(3), 0.001);
+        assertEquals(0.0, arrayFunc.getY(0), 0.001);
+        assertEquals(1.0, arrayFunc.getY(1), 0.001);
+        assertEquals(4.0, arrayFunc.getY(2), 0.001);
+        assertEquals(9.0, arrayFunc.getY(3), 0.001);
     }
 
     @Test
@@ -40,7 +47,7 @@ public class ArrayTabulatedFunctionTest {
         double[] xValues = {1.0, 2.0, 3.0};
         double[] yValues = {2.0, 4.0, 6.0};
         ArrayTabulatedFunction function = new ArrayTabulatedFunction(xValues, yValues);
-        Assertions.assertEquals(3, function.getCount());
+        assertEquals(3, function.getCount());
     }
 
     @Test
@@ -48,7 +55,7 @@ public class ArrayTabulatedFunctionTest {
         double[] xValues = {1.0, 2.0, 3.0};
         double[] yValues = {2.0, 4.0, 6.0};
         ArrayTabulatedFunction function = new ArrayTabulatedFunction(xValues, yValues);
-        Assertions.assertEquals(2.0, function.getX(1));
+        assertEquals(2.0, function.getX(1));
     }
 
     @Test
@@ -56,7 +63,7 @@ public class ArrayTabulatedFunctionTest {
         double[] xValues = {1.0, 2.0, 3.0};
         double[] yValues = {2.0, 4.0, 6.0};
         ArrayTabulatedFunction function = new ArrayTabulatedFunction(xValues, yValues);
-        Assertions.assertEquals(4.0, function.getY(1));
+        assertEquals(4.0, function.getY(1));
     }
 
     @Test
@@ -65,7 +72,7 @@ public class ArrayTabulatedFunctionTest {
         double[] yValues = {2.0, 4.0, 6.0};
         ArrayTabulatedFunction function = new ArrayTabulatedFunction(xValues, yValues);
         function.setY(1, 5.0);
-        Assertions.assertEquals(5.0, function.getY(1));
+        assertEquals(5.0, function.getY(1));
     }
 
     @Test
@@ -73,7 +80,7 @@ public class ArrayTabulatedFunctionTest {
         double[] xValues = {1.0, 2.0, 3.0};
         double[] yValues = {2.0, 4.0, 6.0};
         ArrayTabulatedFunction function = new ArrayTabulatedFunction(xValues, yValues);
-        Assertions.assertEquals(1, function.floorIndexOfX(2.5));
+        assertEquals(1, function.floorIndexOfX(2.5));
     }
 
     @Test
@@ -81,7 +88,7 @@ public class ArrayTabulatedFunctionTest {
         double[] xValues = {1.0, 2.0, 3.0};
         double[] yValues = {2.0, 4.0, 6.0};
         ArrayTabulatedFunction function = new ArrayTabulatedFunction(xValues, yValues);
-        Assertions.assertEquals(1.0, function.extrapolateLeft(0.5));
+        assertEquals(1.0, function.extrapolateLeft(0.5));
     }
 
     @Test
@@ -89,7 +96,7 @@ public class ArrayTabulatedFunctionTest {
         double[] xValues = {1.0, 2.0, 3.0};
         double[] yValues = {2.0, 4.0, 6.0};
         ArrayTabulatedFunction function = new ArrayTabulatedFunction(xValues, yValues);
-        Assertions.assertEquals(8.0, function.extrapolateRight(4.0));
+        assertEquals(8.0, function.extrapolateRight(4.0));
     }
 
     @Test
@@ -97,7 +104,7 @@ public class ArrayTabulatedFunctionTest {
         double[] xValues = {1.0, 2.0, 3.0};
         double[] yValues = {2.0, 4.0, 6.0};
         ArrayTabulatedFunction function = new ArrayTabulatedFunction(xValues, yValues);
-        Assertions.assertEquals(5.0, function.interpolate(2.5, 1));
+        assertEquals(5.0, function.interpolate(2.5, 1));
     }
 
     @Test
@@ -105,7 +112,7 @@ public class ArrayTabulatedFunctionTest {
         double[] xValues = {1.0, 2.0, 3.0};
         double[] yValues = {2.0, 4.0, 6.0};
         ArrayTabulatedFunction function = new ArrayTabulatedFunction(xValues, yValues);
-        Assertions.assertEquals(1.0, function.leftBound());
+        assertEquals(1.0, function.leftBound());
     }
 
     @Test
@@ -113,7 +120,7 @@ public class ArrayTabulatedFunctionTest {
         double[] xValues = {1.0, 2.0, 3.0};
         double[] yValues = {2.0, 4.0, 6.0};
         ArrayTabulatedFunction function = new ArrayTabulatedFunction(xValues, yValues);
-        Assertions.assertEquals(3.0, function.rightBound());
+        assertEquals(3.0, function.rightBound());
     }
 
     @Test
@@ -121,7 +128,7 @@ public class ArrayTabulatedFunctionTest {
         double[] xValues = {1.0, 2.0, 3.0};
         double[] yValues = {2.0, 4.0, 6.0};
         ArrayTabulatedFunction function = new ArrayTabulatedFunction(xValues, yValues);
-        Assertions.assertEquals(1, function.indexOfX(2.0));
+        assertEquals(1, function.indexOfX(2.0));
     }
 
     @Test
@@ -129,7 +136,7 @@ public class ArrayTabulatedFunctionTest {
         double[] xValues = {1.0, 2.0, 3.0};
         double[] yValues = {2.0, 4.0, 6.0};
         ArrayTabulatedFunction function = new ArrayTabulatedFunction(xValues, yValues);
-        Assertions.assertEquals(2, function.indexOfY(6.0));
+        assertEquals(2, function.indexOfY(6.0));
     }
     @Test
     public void testToString() {
@@ -138,7 +145,7 @@ public class ArrayTabulatedFunctionTest {
         ArrayTabulatedFunction function = new ArrayTabulatedFunction(xValues, yValues);
         String expected = "[1.0, 2.0, 3.0]\n[2.0, 4.0, 6.0]";
         String actual = function.toString();
-        Assertions.assertEquals(expected, actual);
+        assertEquals(expected, actual);
     }
 
     @Test
@@ -151,7 +158,7 @@ public class ArrayTabulatedFunctionTest {
         double[] yValues2 = {2.0, 4.0, 6.0};
         ArrayTabulatedFunction function2 = new ArrayTabulatedFunction(xValues2, yValues2);
 
-        Assertions.assertEquals(function1.hashCode(), function2.hashCode());
+        assertEquals(function1.hashCode(), function2.hashCode());
     }
 
     @Test
@@ -175,8 +182,75 @@ public class ArrayTabulatedFunctionTest {
         ArrayTabulatedFunction clone = (ArrayTabulatedFunction) function.clone();
         Assertions.assertNotSame(function, clone);
         for (int i = 0; i < xValues.length; ++i) {
-            Assertions.assertEquals(xValues[i], clone.getX(i), 0.0);
-            Assertions.assertEquals(yValues[i], clone.getY(i), 0.0);
+            assertEquals(xValues[i], clone.getX(i), 0.0);
+            assertEquals(yValues[i], clone.getY(i), 0.0);
         }
+    }
+
+    @Test
+    public void testConstructor_ArrayLengthLessThan2() {
+        double[] xValues = {1.0};
+        double[] yValues = {2.0};
+
+        assertThrows(IllegalArgumentException.class, () -> new ArrayTabulatedFunction(xValues, yValues));
+    }
+
+    @Test
+    public void testConstructor_MathFunctionCountLessThan2() {
+        MathFunction source = x -> x;
+        double xFrom = 0.0;
+        double xTo = 1.0;
+        int count = 1;
+
+        assertThrows(IllegalArgumentException.class, () -> new ArrayTabulatedFunction(source, xFrom, xTo, count));
+    }
+
+    @Test
+    public void testFloorIndexOfX_XLessThanMinimumValue() {
+        double[] xValues = {1.0, 2.0, 3.0};
+        double[] yValues = {2.0, 4.0, 6.0};
+        ArrayTabulatedFunction function = new ArrayTabulatedFunction(xValues, yValues);
+
+        assertThrows(IllegalArgumentException.class, () -> function.floorIndexOfX(0.5));
+    }
+
+    @Test
+    public void testInterpolate_UninterpolatedPeriod() {
+        double[] xValues = {1.0, 2.0, 3.0};
+        double[] yValues = {2.0, 4.0, 6.0};
+        ArrayTabulatedFunction function = new ArrayTabulatedFunction(xValues, yValues);
+
+        assertThrows(InterpolationException.class, () -> function.interpolate(0.5, 0));
+    }
+    @Test
+    public void testIterator_WhileLoop() {
+        double[] xValues = {1.0, 2.0, 3.0};
+        double[] yValues = {2.0, 4.0, 6.0};
+        ArrayTabulatedFunction function = new ArrayTabulatedFunction(xValues, yValues);
+
+        Iterator<Point> iterator = function.iterator();
+        int count = 0;
+        while (iterator.hasNext()) {
+            Point point = iterator.next();
+            assertEquals(xValues[count], point.x, 0.0001);
+            assertEquals(yValues[count], point.y, 0.0001);
+            count++;
+        }
+        assertEquals(xValues.length, count);
+    }
+
+    @Test
+    public void testIterator_ForEachLoop() {
+        double[] xValues = {1.0, 2.0, 3.0};
+        double[] yValues = {2.0, 4.0, 6.0};
+        ArrayTabulatedFunction function = new ArrayTabulatedFunction(xValues, yValues);
+
+        int count = 0;
+        for (Point point : function) {
+            assertEquals(xValues[count], point.x, 0.0001);
+            assertEquals(yValues[count], point.y, 0.0001);
+            count++;
+        }
+        assertEquals(xValues.length, count);
     }
 }
