@@ -1,8 +1,6 @@
 package functions;
 
-import exceptions.ArrayIsNotSortedException;
-import exceptions.DifferentLengthOfArraysException;
-import exceptions.InterpolationException;
+import exceptions.*;
 
 import java.util.Objects;
 import java.util.Iterator;
