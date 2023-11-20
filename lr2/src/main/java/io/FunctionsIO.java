@@ -2,8 +2,12 @@ package io;
 
 
 import functions.*;
+import functions.factory.TabulatedFunctionFactory;
 
 import java.io.*;
+import java.text.NumberFormat;
+import java.text.ParseException;
+import java.util.Locale;
 
 public final class FunctionsIO {
 
@@ -23,6 +27,27 @@ public final class FunctionsIO {
             printWriter.flush();
         } catch (Exception e) {
             e.printStackTrace();
+        }
+    }
+    public static TabulatedFunction readTabulatedFunction(BufferedReader reader, TabulatedFunctionFactory factory) throws IOException {
+        try {
+            int count = Integer.parseInt(reader.readLine());
+            double[] xValues = new double[count];
+            double[] yValues = new double[count];
+            NumberFormat numberFormat = NumberFormat.getInstance(Locale.forLanguageTag("ru"));
+
+            for (int i = 0; i < count; i++) {
+                String line = reader.readLine();
+                String[] values = line.split(" ");
+                double x = numberFormat.parse(values[0]).doubleValue();
+                double y = numberFormat.parse(values[1]).doubleValue();
+                xValues[i] = x;
+                yValues[i] = y;
+            }
+
+            return factory.create(xValues, yValues);
+        } catch (ParseException e) {
+            throw new IOException("Error parsing input", e);
         }
     }
     public static void writeTabulatedFunction(BufferedOutputStream outputStream, TabulatedFunction function) throws IOException {
