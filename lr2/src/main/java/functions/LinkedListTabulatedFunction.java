@@ -212,7 +212,7 @@ public class LinkedListTabulatedFunction extends AbstractTabulatedFunction {
         return interpolate(x, x0, x1, y0, y1);
     }
 
-    @Override
+   /* @Override
     public String toString() {
         String result = "";
         Node currentNode = head;
@@ -224,7 +224,7 @@ public class LinkedListTabulatedFunction extends AbstractTabulatedFunction {
             currentNode = currentNode.next;
         }
         return result;
-    }
+    }*/
 
     @Override
     public boolean equals(Object o) {
