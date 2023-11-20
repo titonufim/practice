@@ -3,12 +3,13 @@ package functions;
 import exceptions.ArrayIsNotSortedException;
 import exceptions.DifferentLengthOfArraysException;
 import exceptions.InterpolationException;
-
+import java.io.Serializable;
 import java.util.Arrays;
 import java.util.Iterator;
 import java.util.NoSuchElementException;
 
-public class ArrayTabulatedFunction extends AbstractTabulatedFunction implements Cloneable {
+public class ArrayTabulatedFunction extends AbstractTabulatedFunction implements Cloneable, Serializable {
+    private static final long serialVersionUID = 1L;
     private final double[] xValues;
     private final double[] yValues;
 

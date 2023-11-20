@@ -29,6 +29,11 @@ public final class FunctionsIO {
             e.printStackTrace();
         }
     }
+    public static void serialize(BufferedOutputStream stream, TabulatedFunction function) throws IOException {
+        ObjectOutputStream objectOutputStream = new ObjectOutputStream(stream);
+        objectOutputStream.writeObject(function);
+        objectOutputStream.flush();
+    }
     public static TabulatedFunction readTabulatedFunction(BufferedReader reader, TabulatedFunctionFactory factory) throws IOException {
         try {
             int count = Integer.parseInt(reader.readLine());
