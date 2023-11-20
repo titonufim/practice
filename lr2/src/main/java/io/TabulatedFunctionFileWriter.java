@@ -1,11 +1,8 @@
 package io;
 
-import functions.ArrayTabulatedFunction;
-import functions.LinkedListTabulatedFunction;
-import functions.TabulatedFunction;
+import functions.*;
 
-import java.io.BufferedWriter;
-import java.io.FileWriter;
+import java.io.*;
 
 public class TabulatedFunctionFileWriter {
 

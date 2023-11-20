@@ -1,9 +1,9 @@
 package io;
 
-import functions.TabulatedFunction;
 
-import java.io.BufferedWriter;
-import java.io.PrintWriter;
+import functions.*;
+
+import java.io.*;
 
 public final class FunctionsIO {
 
@@ -23,6 +23,17 @@ public final class FunctionsIO {
             printWriter.flush();
         } catch (Exception e) {
             e.printStackTrace();
+        }
+    }
+    public static void writeTabulatedFunction(BufferedOutputStream outputStream, TabulatedFunction function) throws IOException {
+        try (DataOutputStream dataOutputStream = new DataOutputStream(outputStream)) {
+            int count = function.getCount();
+            dataOutputStream.writeInt(count);
+            for (Point point : function) {
+                dataOutputStream.writeDouble(point.x);
+                dataOutputStream.writeDouble(point.y);
+            }
+            dataOutputStream.flush();
         }
     }
 }
