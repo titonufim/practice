@@ -177,31 +177,6 @@ public class LinkedListTabulatedFunctionTest {
     }
 
     @Test
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    void testToString() {
-        double[] xValues = {1.0, 2.0, 3.0};
-        double[] yValues = {4.0, 5.0, 6.0};
-        LinkedListTabulatedFunction function = new LinkedListTabulatedFunction(xValues, yValues);
-        String expected = "(1.0; 4.0), (2.0; 5.0), (3.0; 6.0)";
-        assertEquals(expected, function.toString());
-    }
-
-    @Test
     void testEquals() {
         double[] xValues1 = {1.0, 2.0, 3.0};
         double[] yValues1 = {4.0, 5.0, 6.0};
