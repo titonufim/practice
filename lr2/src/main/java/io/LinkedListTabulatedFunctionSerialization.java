@@ -5,7 +5,7 @@ import operations.*;
 import java.io.*;
 public class LinkedListTabulatedFunctionSerialization {
     public static void main(String[] args) {
-        try (BufferedOutputStream outputStream = new BufferedOutputStream(new FileOutputStream("output/serialized array functions.bin"))) {
+        try (BufferedOutputStream outputStream = new BufferedOutputStream(new FileOutputStream("lr2/output/serialized array functions.bin"))) {
 
             double[] xValue = {0.0, 0.5, 1.0};
             double[] yValue = {0.0, 0.25, 1.0};
@@ -24,7 +24,7 @@ public class LinkedListTabulatedFunctionSerialization {
             e.printStackTrace();
         }
 
-        try (BufferedInputStream inputStream = new BufferedInputStream(new FileInputStream("output/serialized array functions.bin"))) {
+        try (BufferedInputStream inputStream = new BufferedInputStream(new FileInputStream("lr2/output/serialized array functions.bin"))) {
 
             TabulatedFunction deserializedListFunction = FunctionsIO.deserialize(inputStream);
             TabulatedFunction deserializedFirstDerivative = FunctionsIO.deserialize(inputStream);

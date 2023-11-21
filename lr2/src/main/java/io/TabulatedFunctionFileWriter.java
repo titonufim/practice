@@ -10,8 +10,8 @@ import java.io.FileWriter;
 public class TabulatedFunctionFileWriter {
 
     public static void main(String[] args) {
-        try (BufferedWriter arrayWriter = new BufferedWriter(new FileWriter("output/array function.txt"));
-             BufferedWriter linkedListWriter = new BufferedWriter(new FileWriter("output/linked list function.txt"))) {
+        try (BufferedWriter arrayWriter = new BufferedWriter(new FileWriter("lr2/output/array function.txt"));
+             BufferedWriter linkedListWriter = new BufferedWriter(new FileWriter("lr2/output/linked list function.txt"))) {
 
             double[] xValues = {0.0, 0.5, 1.0};
             double[] yValues = {0.0, 0.25, 1.0};

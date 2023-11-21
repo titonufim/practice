@@ -6,8 +6,8 @@ import java.io.*;
 public class TabulatedFunctionFileOutputStream {
 
     public static void main(String[] args) {
-        try (BufferedOutputStream arrayFileOutput = new BufferedOutputStream(new FileOutputStream("output/array function.bin"));
-             BufferedOutputStream linkedListFileOutput = new BufferedOutputStream(new FileOutputStream("output/linked list function.bin"))) {
+        try (BufferedOutputStream arrayFileOutput = new BufferedOutputStream(new FileOutputStream("lr2/output/array function.bin"));
+             BufferedOutputStream linkedListFileOutput = new BufferedOutputStream(new FileOutputStream("lr2/output/linked list function.bin"))) {
             double[] xValue = {0.0, 2.0, 5.0};
             double[] yValue = {1.0, 2.5, 6.0};
             TabulatedFunction arrayFunction = new ArrayTabulatedFunction(xValue, yValue);

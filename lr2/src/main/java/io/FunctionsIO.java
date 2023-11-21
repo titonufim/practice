@@ -45,10 +45,12 @@ public final class FunctionsIO {
             for (int i = 0; i < count; i++) {
                 String line = reader.readLine();
                 String[] values = line.split(" ");
-                double x = numberFormat.parse(values[0]).doubleValue();
-                double y = numberFormat.parse(values[1]).doubleValue();
-                xValues[i] = x;
-                yValues[i] = y;
+                if (values.length >= 2) {
+                    double x = numberFormat.parse(values[0]).doubleValue();
+                    double y = numberFormat.parse(values[1]).doubleValue();
+                    xValues[i] = x;
+                    yValues[i] = y;
+                }
             }
 
             return factory.create(xValues, yValues);
