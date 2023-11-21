@@ -7,7 +7,7 @@ import java.io.Serializable;
 
 public class LinkedListTabulatedFunction extends AbstractTabulatedFunction implements Serializable {
     private static final long serialVersionUID = 1L;
-    static class Node {
+    static class Node implements Serializable {
         public double x;
         public double y;
         public Node next;
