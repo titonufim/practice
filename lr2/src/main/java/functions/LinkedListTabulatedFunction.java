@@ -1,13 +1,12 @@
 package functions;
 
 import exceptions.*;
-
-import java.util.Objects;
-import java.util.Iterator;
-import java.util.NoSuchElementException;
+import java.util.*;
+import java.io.Serializable;
 
 
-public class LinkedListTabulatedFunction extends AbstractTabulatedFunction {
+public class LinkedListTabulatedFunction extends AbstractTabulatedFunction implements Serializable {
+    private static final long serialVersionUID = 1L;
     static class Node {
         public double x;
         public double y;

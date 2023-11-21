@@ -2,7 +2,7 @@ package io;
 
 
 import functions.*;
-import functions.factory.TabulatedFunctionFactory;
+import functions.factory.*;
 
 import java.io.*;
 import java.text.NumberFormat;
@@ -81,6 +81,12 @@ public final class FunctionsIO {
             yValue[i] = input.readDouble();
         }
         return factory.create(xValue, yValue);
+    }
+
+    public static TabulatedFunction deserialize(BufferedInputStream stream) throws IOException, ClassNotFoundException {
+        try (ObjectInputStream objectInputStream = new ObjectInputStream(stream)) {
+            return (TabulatedFunction) objectInputStream.readObject();
+        }
     }
 
 }

@@ -1,28 +1,22 @@
 package io;
 
-import functions.ArrayTabulatedFunction;
-import operations.TabulatedDifferentialOperator;
-import functions.TabulatedFunction;
-
-import java.io.BufferedInputStream;
-import java.io.BufferedOutputStream;
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
-import java.io.IOException;
-
-public class ArrayTabulatedFunctionSerialization {
+import functions.*;
+import operations.*;
+import java.io.*;
+public class LinkedListTabulatedFunctionSerialization {
     public static void main(String[] args) {
         try (BufferedOutputStream outputStream = new BufferedOutputStream(new FileOutputStream("output/serialized array functions.bin"))) {
 
-            double[] xValues = {0.0, 0.5, 1.0};
-            double[] yValues = {0.0, 0.25, 1.0};
-            TabulatedFunction arrayFunction = new ArrayTabulatedFunction(xValues, yValues);
+            double[] xValue = {0.0, 0.5, 1.0};
+            double[] yValue = {0.0, 0.25, 1.0};
+
+            TabulatedFunction function = new LinkedListTabulatedFunction(xValue, yValue);
 
             TabulatedDifferentialOperator differentialOperator = new TabulatedDifferentialOperator();
-            TabulatedFunction firstDerivative = differentialOperator.derive(arrayFunction);
+            TabulatedFunction firstDerivative = differentialOperator.derive(function);
             TabulatedFunction secondDerivative = differentialOperator.derive(firstDerivative);
 
-            FunctionsIO.serialize(outputStream, arrayFunction);
+            FunctionsIO.serialize(outputStream, function);
             FunctionsIO.serialize(outputStream, firstDerivative);
             FunctionsIO.serialize(outputStream, secondDerivative);
 
@@ -32,12 +26,11 @@ public class ArrayTabulatedFunctionSerialization {
 
         try (BufferedInputStream inputStream = new BufferedInputStream(new FileInputStream("output/serialized array functions.bin"))) {
 
-            TabulatedFunction deserializedArrayFunction = FunctionsIO.deserialize(inputStream);
+            TabulatedFunction deserializedListFunction = FunctionsIO.deserialize(inputStream);
             TabulatedFunction deserializedFirstDerivative = FunctionsIO.deserialize(inputStream);
             TabulatedFunction deserializedSecondDerivative = FunctionsIO.deserialize(inputStream);
 
-
-            System.out.println("Original Array Function: " + deserializedArrayFunction.toString());
+            System.out.println("Original Array Function: " + deserializedListFunction.toString());
             System.out.println("First Derivative: " + deserializedFirstDerivative.toString());
             System.out.println("Second Derivative: " + deserializedSecondDerivative.toString());
 
