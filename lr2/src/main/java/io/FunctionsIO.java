@@ -34,6 +34,7 @@ public final class FunctionsIO {
         objectOutputStream.writeObject(function);
         objectOutputStream.flush();
     }
+
     public static TabulatedFunction readTabulatedFunction(BufferedReader reader, TabulatedFunctionFactory factory) throws IOException {
         try {
             int count = Integer.parseInt(reader.readLine());
@@ -55,15 +56,31 @@ public final class FunctionsIO {
             throw new IOException("Error parsing input", e);
         }
     }
+
+
     public static void writeTabulatedFunction(BufferedOutputStream outputStream, TabulatedFunction function) throws IOException {
         try (DataOutputStream dataOutputStream = new DataOutputStream(outputStream)) {
             int count = function.getCount();
             dataOutputStream.writeInt(count);
-            for (Point point : function) {
-                dataOutputStream.writeDouble(point.x);
-                dataOutputStream.writeDouble(point.y);
+            for (int i = 0; i < count; i++) {
+                dataOutputStream.writeDouble(function.getX(i));
+                dataOutputStream.writeDouble(function.getY(i));
             }
             dataOutputStream.flush();
         }
     }
+
+    public static TabulatedFunction readTabulatedFunction(BufferedInputStream inputStream, TabulatedFunctionFactory factory) throws IOException {
+
+        DataInputStream input = new DataInputStream(inputStream);
+        int size = input.readInt();
+        double[] xValue = new double[size];
+        double[] yValue = new double[size];
+        for (int i = 0; i < size; i++) {
+            xValue[i] = input.readDouble();
+            yValue[i] = input.readDouble();
+        }
+        return factory.create(xValue, yValue);
+    }
+
 }

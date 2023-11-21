@@ -6,18 +6,15 @@ import java.io.*;
 public class TabulatedFunctionFileOutputStream {
 
     public static void main(String[] args) {
-        try (BufferedOutputStream arrayOutputStream = new BufferedOutputStream(new FileOutputStream("output/array function.bin"));
-             BufferedOutputStream linkedListOutputStream = new BufferedOutputStream(new FileOutputStream("output/linked list function.bin"))) {
+        try (BufferedOutputStream arrayFileOutput = new BufferedOutputStream(new FileOutputStream("output/array function.bin"));
+             BufferedOutputStream linkedListFileOutput = new BufferedOutputStream(new FileOutputStream("output/linked list function.bin"))) {
+            double[] xValue = {0.0, 2.0, 5.0};
+            double[] yValue = {1.0, 2.5, 6.0};
+            TabulatedFunction arrayFunction = new ArrayTabulatedFunction(xValue, yValue);
+            TabulatedFunction linkedListFunction = new LinkedListTabulatedFunction(xValue, yValue);
 
-            double[] xValues = {0.0, 0.5, 1.0};
-            double[] yValues = {0.0, 0.25, 1.0};
-
-            TabulatedFunction arrayFunction = new ArrayTabulatedFunction(xValues, yValues);
-            TabulatedFunction linkedListFunction = new LinkedListTabulatedFunction(xValues, yValues);
-
-            FunctionsIO.writeTabulatedFunction(arrayOutputStream, arrayFunction);
-            FunctionsIO.writeTabulatedFunction(linkedListOutputStream, linkedListFunction);
-
+            FunctionsIO.writeTabulatedFunction(arrayFileOutput, arrayFunction);
+            FunctionsIO.writeTabulatedFunction(linkedListFileOutput, linkedListFunction);
         } catch (IOException e) {
             e.printStackTrace();
         }
