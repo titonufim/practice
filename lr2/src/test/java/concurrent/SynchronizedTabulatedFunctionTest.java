@@ -72,4 +72,42 @@ class SynchronizedTabulatedFunctionTest {
     private TabulatedFunction createTabulatedFunction(double[] xValues, double[] yValues) {
         return new ArrayTabulatedFunction(xValues, yValues);
     }
+
+    @Test
+    public void testDoSynchronouslyWithValueOperation() {
+
+        double sum = synchronizedFunction.doSynchronously(synchronizedFunction -> {
+            double result = 0.0;
+            for (int i = 0; i < synchronizedFunction.getCount(); i++) {
+                result += synchronizedFunction.getY(i);
+            }
+            return result;
+        });
+
+        assertEquals(5.0, sum);
+    }
+    @Test
+    public void testDoSynchronouslyWithVoidOperation() {
+
+        synchronizedFunction.doSynchronously(synchronizedFunction -> {
+            for (int i = 0; i < synchronizedFunction.getCount(); i++) {
+                System.out.println("x = " + synchronizedFunction.getX(i));
+            }
+            return null;
+        });
+
+    }
+    @Test
+    public void testDoSynchronouslyWithLambdaExpression() {
+
+        double average = synchronizedFunction.doSynchronously(synchronizedFunction -> {
+            double sum = 0.0;
+            for (int i = 0; i < synchronizedFunction.getCount(); i++) {
+                sum += synchronizedFunction.getY(i);
+            }
+            return sum / synchronizedFunction.getCount();
+        });
+
+        assertEquals(1.6666666666666667, average);
+    }
 }
